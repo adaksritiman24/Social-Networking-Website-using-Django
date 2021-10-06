@@ -1,0 +1,144 @@
+{% extends 'super.html' %}
+{% block op%}
+{% load static %}
+<h2 style="font-weight: bold;">Your Home Page</h2>
+<hr>
+<div class="d-flex post-something">
+    <button class="btn btn-primary" onclick="vidbtnclick()"><i class="bi bi-camera-reels-fill"> </i> Post Video</button>
+    <button class="btn btn-primary" onclick="imgbtnclick()"><i class="bi bi-card-image"> </i> Post Image</button>
+    <button class="btn btn-primary" onclick="textbtnclick()"><i class="bi bi-pencil-square"> </i> Write a Post</button>
+</div>
+<div id="upload-area" class="hidden">
+    <form action="" method="post" id = "vid-upload-form" class="hidden" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" name="type-of-file" hidden value="video">
+            <label for="formFile" class="form-label">Upload A Video file</label>
+            <input class="form-control" type="file"  name="videofile"> <br>
+
+            <input type="text" class="form-control" name="desc" placeholder="Write an optional Description">
+            <input type="submit" value = "Upload" class="btn btn-outline-success btn-sm mt-2" >
+        </div>
+    </form>
+    <form action="" method="post" id = "img-upload-form" class="hidden" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" name="type-of-file" hidden value="image">
+            <label for="imgFile" class="form-label">Upload An Image</label>
+            <input class="form-control" type="file" name="imagefile"> <br>
+
+            <input type="text" class="form-control" name="desc" placeholder="Write an optional Description">
+            <input type="submit" value = "Upload" class="btn btn-outline-success btn-sm mt-2" >
+        </div>
+    </form>
+    <form action="" method="post" id = "text-upload-form" class="hidden">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" name="type-of-file" hidden value="text">
+            <label for="textFile" class="form-label">Write Something</label>
+            <textarea class="form-control" rows="3" name="textdata"></textarea> <br>
+
+            <input type="text" name="desc" class="form-control"  placeholder="Write an optional Description">
+            <input type="submit" value = "Upload" class="btn btn-outline-success btn-sm mt-2" >
+        </div>
+    </form>
+</div>
+<hr>
+<!-- feed -->
+{% for post in posts %}
+<div class="post mt-3">
+    <div class="post-header">
+        <p class="uploader-name">
+            {% if post.person.pic %}
+            <img src="{{post.person.pic.url}}" alt="" class = "postpic">
+            {% else %}
+            <img src="{% static 'imgs/default-pic.png' %}" alt="" class = "postpic">
+            {% endif %}
+            <a href="{% url 'profile' post.person.id %}" style="color: white;">{{post.person.first_name}} {{post.person.last_name}}</a>
+        </p>
+        <p class="upload-time"><i class="bi bi-clock-fill"> </i>{{post.time}}</p>
+    </div>
+    {% if post.desc %}
+    <p class="post-desc">{{post.desc}}</p>
+    {% endif %}
+    <hr>
+    {% if post.type == 'image' %}
+    <img src="{{post.image.url}}" alt="nf" class="rounded mx-auto d-block img-fluid">
+    {% endif %}
+    {% if post.type == 'text' %}
+    <p style="margin: 0px 7px;">{{post.text}}</p>
+    {% endif %}
+    {% if post.type == 'video' %}
+    <div class="video-style">
+        <video class="embed-responsive" controls="controls">
+            <source src="{{post.video.url}}" type="video/mp4" />
+        </video>
+    </div>
+    
+    {% endif %}
+    <div id = "l-c">
+        <div class="liker">
+            {% if not post.user_liked %}
+            <i class="bi bi-hand-thumbs-up" id="thumbs_{{post.id}}" onclick="addOrRemoveLike('{{post.id}}')"></i>
+            {% else %}
+            <i class="bi bi-hand-thumbs-up-fill" id="thumbs_{{post.id}}" onclick="addOrRemoveLike('{{post.id}}')"></i>
+            {% endif %}
+            <span id="postlikes_{{post.id}}"> {{post.likes}}</span>
+        </div>
+        <div class="commenter">
+            <p>
+                <a data-bs-toggle="collapse" href="#comment-section-{{post.id}}" role="button" aria-expanded="false" aria-controls="collapseExample" onclick="showComments('{{post.id}}')">
+                    <span>{{post.comment_count}}</span> <i class="bi bi-card-text"></i>
+                </a>
+            </p>
+        </div>
+    </div>
+    <!-- commentsection -->
+    <div class="collapse" id="comment-section-{{post.id}}">
+        <div class="card card-body comment-sec-style" id = "comments-for-post-{{post.id}}">
+          
+        </div>
+        <div class="upload-comment mt-1">
+            <input type="text" class="form-control" placeholder=" Write your comment here" id = "comment-field-{{post.id}}">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-1">
+                <button class="btn btn-primary" type="button" onclick="uploadComment('{{post.id}}','{{active.first_name}}','{{active.last_name}}')"><i class="bi bi-shift-fill"></i></button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+{% endfor %}
+{% endblock %}
+
+<!-- popular -->
+{% block rj %}
+<div class="others">
+    <h4>Popular</h4>
+    <hr>
+    {% for object in others %}
+    <div class="side-item mb-2">
+        <h5>
+            {% if not object.pic %}
+            <img src="{% static 'imgs/default-pic.png' %}" alt="" class = "subpic">
+            {% else %}
+            <img src="{{object.pic.url}}" alt="" class = "subpic">
+            {% endif %}
+
+            <a href= "{% url 'profile' object.id %}">{{object.first_name}} {{object.last_name}}</a>
+        </h5>
+        <span><i class="bi bi-envelope-fill"> </i> {{object.email}}</span>
+        <div class = "follow-head">
+            <span><i class="bi bi-people-fill"></i> {{object.followers}} followers</span>
+            {% if active.id != object.id %}
+                {% if object.id in following_list %}
+                <button class="follow-btn" id = "follow-person-{{object.id}}" onclick="followHandler('{{object.id}}')">Unfollow</button>
+                {% else %}
+                <button class="follow-btn" id = "follow-person-{{object.id}}" onclick="followHandler('{{object.id}}')">Follow</button>
+                {% endif %}
+            {% endif %}
+        </div>
+        
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

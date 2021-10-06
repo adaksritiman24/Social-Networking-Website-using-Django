@@ -1,0 +1,78 @@
+{% extends 'super.html' %}
+{% load static %}
+{% block op %}
+<div class="liked-container">
+    <h3>Liked Posts</h3>
+    <hr>
+
+    {% for post in posts %}
+    <div class="lpost mt-3">
+        <div class="post-header">
+            <p class="uploader-name">
+                {% if post.person.pic %}
+                <img src="{{post.person.pic.url}}" alt="" class="postpic">
+                {% else %}
+                <img src="{% static 'imgs/default-pic.png' %}" alt="" class="postpic">
+                {% endif %}
+                <a href="{% url 'profile' post.person.id %}" style="color: rgb(12, 11, 11);">{{post.person.first_name}}</a>
+            </p>
+            <p class="upload-time"><i class="bi bi-clock-fill"> </i>{{post.time}}</p>
+        </div>
+        {% if post.desc %}
+        <p class="post-desc">{{post.desc}}</p>
+        {% endif %}
+        <hr>
+        {% if post.type == 'image' %}
+        <img src="{{post.image.url}}" alt="nf" class="rounded mx-auto d-block img-fluid">
+        {% endif %}
+        {% if post.type == 'text' %}
+        <p style="margin: 0px 7px;">{{post.text}}</p>
+        {% endif %}
+        {% if post.type == 'video' %}
+        <div class="video-style">
+            <video class="embed-responsive" controls="controls">
+                <source src="{{post.video.url}}" type="video/mp4" />
+            </video>
+        </div>
+
+        {% endif %}
+        <div id="l-c">
+            <div class="liker">
+                {% if not post.user_liked %}
+                <i class="bi bi-hand-thumbs-up" id="thumbs_{{post.id}}" onclick="addOrRemoveLike('{{post.id}}')"></i>
+                {% else %}
+                <i class="bi bi-hand-thumbs-up-fill" id="thumbs_{{post.id}}"
+                    onclick="addOrRemoveLike('{{post.id}}')"></i>
+                {% endif %}
+                <span id="postlikes_{{post.id}}"> {{post.likes}}</span>
+            </div>
+            <div class="lcommenter">
+                <p>
+                    <a data-bs-toggle="collapse" href="#comment-section-{{post.id}}" role="button" aria-expanded="false"
+                        aria-controls="collapseExample" onclick="showComments('{{post.id}}')">
+                        <span>{{post.comment_count}}</span> <i class="bi bi-card-text"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <!-- commentsection -->
+        <div class="collapse" id="comment-section-{{post.id}}">
+            <div class="card card-body comment-sec-style" id="comments-for-post-{{post.id}}">
+
+            </div>
+            <div class="upload-comment mt-1">
+                <input type="text" class="form-control" placeholder=" Write your comment here"
+                    id="comment-field-{{post.id}}">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-1">
+                    <button class="btn btn-primary" type="button"
+                        onclick="uploadComment('{{post.id}}','{{active.first_name}}','{{active.last_name}}')"><i
+                            class="bi bi-shift-fill"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

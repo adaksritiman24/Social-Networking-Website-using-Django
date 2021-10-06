@@ -1,0 +1,135 @@
+
+.option{
+    padding-right: 14px;
+    width: 300px;
+    padding: 15px;
+    background-color: rgb(244, 241, 245);
+    border-radius: 10px;
+    box-shadow: 2px 1px 6px 5px rgb(185, 184, 184);
+}
+.options{
+    border-bottom: 1px solid black;
+    text-decoration: none;
+    color: rgb(66, 65, 65);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    display: block;
+    padding: 10px 0px 10px 4px;
+    
+}
+.options:first-of-type{
+    border-top: 1px solid rgb(66, 66, 66);   
+}
+.options:hover{
+    background-color: rgb(51, 51, 51);
+    color: white;
+}
+.post-something button{
+    margin-right: 5px;
+}
+
+.holder{
+    background-color: white; 
+    border:2px solid rgb(228, 225, 225);
+    border-radius: 15px;
+    padding: 15px 10px;
+    box-shadow: 2px 1px 6px 5px rgb(187, 185, 185);
+}
+
+.hidden{
+    display: none;
+}
+#upload-area{
+    margin: 10px 0px;
+    padding: 5px;
+    padding-bottom: 0px;
+    background-color: white;
+    border: 1px solid rgb(182, 178, 178);
+    border-radius: 5px;
+}
+.post{
+    padding: 15px 2px;
+    background-color: rgb(48, 48, 48);
+    color: cornsilk;
+    border: 1px solid rgb(99, 98, 98);
+    border-radius: 5px;
+}
+.post-desc{
+    padding: 0px 7px;
+}
+.liker i{
+    font-size: 2rem;
+    cursor: pointer;
+}
+.liker span{
+    font-size: 2rem;
+    margin-left: 10px;
+}
+#l-c{
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid gray;
+    margin-top: 5px;
+    padding: 5px;
+}
+.commenter a i, .commenter a span{
+    color: white;
+    font-size: 2rem;
+    margin-right: 10px;
+}
+
+.uploader-name{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.upload-time{
+    font-size: 1rem;
+    margin-top: 7px;
+}
+.post-header{
+    display: flex;
+    padding: 0px 7px;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+
+}
+
+.video-style{
+    display: flex;
+    justify-content: center;
+}
+.video-style video{
+    max-width: 100%;
+}
+
+.lpost{
+    padding: 15px 2px;
+    background-color: rgb(219, 217, 217);
+    color: rgb(5, 5, 5);
+    border: 1px solid rgb(131, 129, 129);
+    border-radius: 5px;
+}
+.lcommenter a i, .lcommenter a span{
+    color: rgb(7, 7, 7);
+    font-size: 2rem;
+    margin-right: 10px;
+}
+.notifications{
+    margin: 9px;
+    padding: 7px;
+    padding-top: 12px;
+    padding-bottom: 3px;
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(219, 218, 218);
+}
+
+
+.read{
+    background-color: rgb(243, 243, 242);
+    
+}
+.unread{
+    background-color: rgb(175, 173, 173);
+}

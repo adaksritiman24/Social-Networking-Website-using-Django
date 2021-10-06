@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% for m in messages %}
+<div class="alert alert-success" role="alert">
+    {{m}}
+</div>
+{% endfor %}
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-sm-3 option-holder">
+            <ul class="option">
+                <h3>
+                {% if not active.pic %}
+                <img src="{% static 'imgs/default-pic.png' %}" alt="" class = "superpic">
+                {% else %}
+                <img src="{{active.pic.url}}" alt="" class = "superpic">
+                {% endif %}
+                {{active.first_name}}</h3>
+                <p>{{active.followers}} followers</p>
+                <a class="options" href="{% url 'home' %}"><i class="bi bi-house-fill"> </i> Home</a> 
+                <a class="options" href="{% url 'profile' active.id %}"><i class="bi bi-person-square"> </i> Profile</a>
+                <a class="options" href="{% url 'search' %}"><i class="bi bi-search"> </i> Search</a>
+                <a class="options" href="{% url 'liked' %}"><i class="bi bi-star"> </i> Liked</a> 
+                {% if homepage %}
+                <a class="options" href="{% url 'notifications' active.id %}">
+                    <i class="bi bi-bell-fill"></i> 
+                    Notifications &nbsp;
+                    {% if count_n > 0 %}
+                    <span class="n-icon">
+                        {{count_n}}
+                    </span>
+                    {% endif %}
+                </a> 
+                {% endif %}
+            </ul>
+            {% if following_persons %}
+            <div class="option">
+                <div class="others">
+                    <h4>Following</h4>
+                    <hr>
+                    {% for object in following_persons %}
+                    <div class="side-item mb-2">
+                        <h5>
+                            {% if not object.pic %}
+                            <img src="{% static 'imgs/default-pic.png' %}" alt="" class = "subpic">
+                            {% else %}
+                            <img src="{{object.pic.url}}" alt="" class = "subpic">
+                            {% endif %}
+                
+                            <a href= "{% url 'profile' object.id %}">{{object.first_name}} {{object.last_name}}</a>
+                        </h5>
+                        <span><i class="bi bi-envelope-fill"> </i> {{object.email}}</span>
+                        <div class = "follow-head">
+                            <span><i class="bi bi-people-fill"> </i>{{object.followers}} followers</span>
+                        </div>
+                        
+                    </div>
+                    {% endfor %}
+                </div>
+                
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-sm-6 offset-md-0 mb-5 holder">
+            {% block op%}
+            {% endblock %}
+        </div>
+        {% if others %}
+        <div class="col-sm-3">
+            <div class="side">
+                {% block rj %}
+                {% endblock %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

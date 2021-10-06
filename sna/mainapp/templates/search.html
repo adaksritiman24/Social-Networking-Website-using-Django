@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-8 offset-md-2 mb-4">
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="text" class="form-control mb-2" style="border: 3px solid black;"
+                    placeholder="Search People or Posts" , name="term">
+                <input type="submit" value="Submit" class="btn btn-success mt-3">
+            </form>
+
+            <div class="searched-profiles">
+
+                <h4 class="mt-4 text-center" style="font-weight: bold;">People</h4>
+                <hr>
+                {% for object in profiles %}
+                <div class="side-item mb-2 searched-profiles-style">
+                    <h5>
+                        {% if not object.pic %}
+                        <img src="{% static 'imgs/default-pic.png' %}" alt="" class="subpic">
+                        {% else %}
+                        <img src="{{object.pic.url}}" alt="" class="subpic">
+                        {% endif %}
+
+                        <a href="{% url 'profile' object.id %}">{{object.first_name}} {{object.last_name}}</a>
+                    </h5>
+                    <hr>
+                    {% if object.profession %}
+                    <h6>{{object.profession}}</h6>
+                    {% endif %}
+
+                    {% if object.city %}
+                    <span><i class="bi bi-geo-alt-fill"> </i> {{object.city}}, {{object.country}}</span>
+                    {% endif %}
+                    <span><i class="bi bi-envelope-fill"> </i> {{object.email}}</span>
+                    <div class="follow-head">
+                        <span><i class="bi bi-people-fill"> </i>{{object.followers}} followers</span>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="searched-posts mb-5">
+                <h4 class="mt-4 text-center" style="font-weight: bold;">Posts</h4>
+                <hr>
+
+                <!-- posts -->
+                {% for post in posts %}
+                <div class="post mt-3">
+                    <div class="post-header">
+                        <p class="uploader-name">
+                            {% if post.person.pic %}
+                            <img src="{{post.person.pic.url}}" alt="" class="postpic">
+                            {% else %}
+                            <img src="{% static 'imgs/default-pic.png' %}" alt="" class="postpic">
+                            {% endif %}
+                            <a href="{% url 'profile' post.person.id %}"
+                                style="color: white;">{{post.person.first_name}}</a>
+                        </p>
+                        <p class="upload-time"><i class="bi bi-clock-fill"> </i>{{post.time}}</p>
+                    </div>
+                    {% if post.desc %}
+                    <p class="post-desc">{{post.desc}}</p>
+                    {% endif %}
+                    <hr>
+                    {% if post.type == 'image' %}
+                    <img src="{{post.image.url}}" alt="nf" class="rounded mx-auto d-block img-fluid">
+                    {% endif %}
+                    {% if post.type == 'text' %}
+                    <p style="margin: 0px 7px;">{{post.text}}</p>
+                    {% endif %}
+                    {% if post.type == 'video' %}
+                    <div class="video-style">
+                        <video class="embed-responsive" controls="controls">
+                            <source src="{{post.video.url}}" type="video/mp4" />
+                        </video>
+                    </div>
+
+                    {% endif %}
+                    <div id="l-c" style="display: flex; justify-content:center;">
+                        <div class="commenter">
+                            <p class="d-flex justify-content-center">
+                                <a data-bs-toggle="collapse" href="#comment-section-{{post.id}}" role="button"
+                                    aria-expanded="false" aria-controls="collapseExample"
+                                    onclick="showComments('{{post.id}}')">
+                                    <i class="bi bi-card-text"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- commentsection -->
+                    <div class="collapse" id="comment-section-{{post.id}}">
+                        <div class="card card-body comment-sec-style" id="comments-for-post-{{post.id}}">
+
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,144 @@
+.bg-img{
+    height: 200px;
+    margin: 0;
+    padding: 0;
+    background-image: url('../imgs/default-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.profile-img{
+    height: 150px;
+    width: 150px;
+    position: relative;
+    left: 50%;
+    top: 100%;
+    transform: translate(-50%, -50%);
+}
+.profile-img img{
+    height: inherit;
+    width: inherit;
+    border-radius: 50%;
+    border: 8px solid rgb(196, 194, 194);
+}
+.profile-body{
+    margin-top: 90px;
+}
+
+.superpic{
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+}
+.postpic{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border:3px solid white;
+}
+.side{
+    background-color: white; 
+    border:2px solid rgb(228, 225, 225);
+    border-radius: 15px;
+    padding: 15px 10px;
+    margin-left: 4px;
+    box-shadow: 2px 1px 6px 5px rgb(187, 185, 185);
+}
+.side-item{
+    display: block;
+    background-color: rgb(211, 210, 210);
+    border-radius: 7px;
+    padding: 5px;
+    color: black;
+}
+.side-item:hover{
+    color: black;
+    background-color: rgb(173, 172, 172);
+}
+.side-item span, h6{
+    color: #585757;
+    padding: 0px 10px;
+    font-weight: bold;
+}
+.side-item h5{
+    padding-left: 7px;
+}
+.subpic{
+    width: 50px;
+    height: 50px;
+}
+.single-comment-style{
+    border-radius: 20px;
+    background-color: rgba(2, 53, 53, 0.75);
+    color: thistle;
+    margin: 2px 16px;
+    padding: 15px;
+    width: auto;
+    display: inline-block;
+    
+}
+.single-comment-style p{
+    margin-bottom: 0px;
+}
+.single-comment-style h6{
+    font-weight: bold;
+    color: white;
+}
+.comment-sec-style{
+    background-color: rgb(92, 91, 91);
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+.follow-head{
+    display: flex;
+    justify-content: space-between;
+
+}
+.follow-head span{
+    color: black;
+}
+.follow-btn{
+    position: relative;
+    width: 50%;
+    margin-right: 7px;
+    color: white;
+    background-color: rgba(4, 21, 97, 0.8);
+    border-radius: 4px;
+    border : none;
+}
+.follow-btn:hover{
+    background-color: rgb(4, 21, 97);
+}
+.fandp{
+    display: flex;
+    justify-content: space-evenly;
+}
+.fandp p{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.searched-profiles-style{
+    background-color: white;
+    margin-top: 15px;
+    padding: 10px 12px;
+    transform: translateX(50%);
+    width: 50%;
+}
+.searched-profiles-style:hover{
+    background-color: white;
+}
+.searched-profiles-style h5 a{
+    color: black;
+}
+
+.n-icon{
+    background-color: red;
+    color: white;
+    
+    padding: 3px 7px;
+
+    border-radius: 50%;
+}

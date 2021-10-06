@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="signup-bg">
+
+<div class="container" id = "signup-form">
+    <div class="row">
+        <div class="col-sm-6 offset-sm-5">
+            <form action="" method="post" class="form-style">
+                {% csrf_token %}
+                <h3 class="text-center" style="font-weight: bold;">SIGN UP</h3>
+                <p class="text-center">Already have and account? <a href="{% url 'login'%}">Login</a></p>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{form.first_name.label_tag}}
+                        {{form.first_name}}
+                        <p class="error">{{form.first_name.errors | striptags}}</p>
+                        
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.last_name.label_tag}}
+                        {{form.last_name}}
+                        <p class="error">{{form.last_name.errors | striptags}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        {{form.username.label_tag}}
+                        {{form.username}}
+                        <p class="error">{{form.username.errors | striptags}}</p>
+                    </div>
+                    <div class="col-sm-4">
+                        {{form.dob.label_tag}}
+                        {{form.dob}}
+                        <p class="error">{{form.dob.errors | striptags}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{form.email.label_tag}}
+                        {{form.email}}
+                        <p class="error">{{form.email.errors | striptags}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        {{form.password1.label_tag}}
+                        {{form.password1}}
+                        <p class="error">{{form.password1.errors | striptags}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        {{form.password2.label_tag}}
+                        {{form.password2}}
+                        <p class="error">{{form.password2.errors | striptags}}</p>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-12"><a href="">Terms and Conditions</a></div>
+                    <div class="col-sm-6">
+                        <p>{{form.accept}} I accept all the terms and conditions</p>
+                        <p class="error">{{form.accept.errors | striptags}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <input type="submit" value="Sign In" class="btn-awesome">
+                    </div>
+                </div>
+            </form>
+            {% for m in messages %}
+                <div class="alert alert-danger mt-3" role="alert">
+                    {{m}}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'super.html' %}
+{% block op%}
+    <h4 class="text-center">Notifications</h4>
+    <hr>
+    {% for n in notifications %}
+        {% if n.read %}
+        <div class="notifications read">
+            <p>
+                <b>{{n.sender.first_name}} {{n.sender.last_name}}</b> {{n.message}}
+            </p>
+            <p>
+                <i class="bi bi-clock"> {{n.time}}</i>
+            </p>
+        </div>
+        {% else %}
+        <div class="notifications unread">
+            <p>
+                <b>{{n.sender.first_name}} {{n.sender.last_name}}</b> {{n.message}}
+            </p>
+            <p>
+                <i class="bi bi-clock"> {{n.time}}</i>
+            </p>
+        </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
