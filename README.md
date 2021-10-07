@@ -33,8 +33,9 @@ A notification will be sent to the user whenever someone starts following the us
 ![login](https://user-images.githubusercontent.com/53531220/136249197-d49f927e-1061-4d3a-a822-a723505837fa.JPG)
 
 * home page
-![home1](https://user-images.githubusercontent.com/53531220/136249209-d2f61265-b875-471b-abc7-f575671392f3.JPG)
-![home2](https://user-images.githubusercontent.com/53531220/136249244-2d49e4ca-167b-454d-971f-a514fe45ccf7.JPG)
+![home1](https://user-images.githubusercontent.com/53531220/136325180-47172903-c3be-4449-b780-9c92f56f2250.JPG)
+![home2](https://user-images.githubusercontent.com/53531220/136325191-aa4c0c9a-a913-4994-939c-c96542e6232a.JPG)
+
 
 * profile page
 ![profile](https://user-images.githubusercontent.com/53531220/136249283-bde919b9-7127-43ad-969c-baea1d1edc0f.JPG)
