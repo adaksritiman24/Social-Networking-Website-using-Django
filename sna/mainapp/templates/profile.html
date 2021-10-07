@@ -110,7 +110,7 @@
             <div class="card card-body">
                 <form action="{% url 'update-bio' %}" method="post">
                     {% csrf_token %}
-                    <input type="text" placeholder="Write your Bio" name="update-field" class="form-control">
+                    <input type="text" id = "emoji5" placeholder="Write your Bio" name="update-field" class="form-control">
                     <input type="submit" value="Update" class="btn btn-success btn-sm mt-3">
                 </form>
             </div>
