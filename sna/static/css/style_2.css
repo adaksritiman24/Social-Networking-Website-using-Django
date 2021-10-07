@@ -1,4 +1,12 @@
-
+.super-style{
+    max-height: 750px;
+    overflow-y: hidden;
+}
+.option-holder{
+    position: relative;
+    height: 730px;
+    overflow-y: scroll;
+}
 .option{
     padding-right: 14px;
     width: 300px;
@@ -6,6 +14,7 @@
     background-color: rgb(244, 241, 245);
     border-radius: 10px;
     box-shadow: 2px 1px 6px 5px rgb(185, 184, 184);
+    
 }
 .options{
     border-bottom: 1px solid black;
@@ -34,8 +43,20 @@
     border-radius: 15px;
     padding: 15px 10px;
     box-shadow: 2px 1px 6px 5px rgb(187, 185, 185);
-}
+    position: relative;
+    height: 730px;
+    overflow-y: scroll;
 
+}
+.side-option{
+    position: relative;
+    height: 730px;
+    overflow-y: scroll;
+    
+}
+.side-option::-webkit-scrollbar, .holder::-webkit-scrollbar, .option-holder::-webkit-scrollbar{
+    width: 0 !important;
+}
 .hidden{
     display: none;
 }
